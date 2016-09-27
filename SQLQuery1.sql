@@ -166,7 +166,7 @@ Values (1, 'Sharpstown', 'Matinee Street'),
 Create Table Book_Loans
 	  (Book_ID int,
 	  BranchID int, CardNO int,
-	  DateOut date, DueDate date)
+	  DateOut date null, DueDate date null)
 
 Insert Into Book_Loans
 Values	(2,2,133,'2016-1-1','2016-2-1'),
@@ -218,7 +218,7 @@ Values	(2,2,133,'2016-1-1','2016-2-1'),
 		(9,5,831,'2016-9-12','2016-10-1'),
 		(10,1,831,'2016-9-8','2016-10-8'),
 		(11,1,831,'2016-9-1','2016-10-1'),
-		(17,5,831,'2016-9-26','2016-10-26')
+		(17,5,831,'2016-8-26','2016-9-26')
 
 Create Table Borrower
 	  (CardNO int primary key,
@@ -236,4 +236,5 @@ Values  (223,'Farnsworth', 'Sligo St', 2648923),
 		(730, 'Floyd', 'New Albany Road',2847595),
 		(831, 'Thile', 'Passion St', 6753425),
 		(932, 'Pickelny', 'Blues Ave', 5647283),
-		(133, 'Witcher', 'Fiddle St', 9125342)
+		(133, 'Witcher', 'Fiddle St', 9125342),
+		(111, 'George', 'Hayloft St', 7632847)
