@@ -150,18 +150,19 @@ Values (1, 2, 3),
 	(10, 5, 2),
 	(15, 5, 5),
 	(16, 5, 4),
-	(17, 5, 5)
+	(17, 5, 5),
+	(18, 5, 1)
 
 Create Table Library_Branch
 	  (BranchID int primary key,
 	  BranchName varchar(50), [Address] varchar (50))
 
 Insert Into Library_Branch
-Values (1, 'Sharpstown', 'Matinee Street'),
-		(2, 'Central', 'Oliver Road'),
+Values (5, 'Sharpstown', 'Matinee Street'),
+		(1, 'Central', 'Oliver Road'),
 		(3, 'Jacobstown','Cool Street'),
-		(4, 'Fayetteville','Main Street'),
-		(5, 'Rodgers', 'Fossil Cove')
+		(2, 'Fayetteville','Main Street'),
+		(4, 'Rodgers', 'Fossil Cove')
 
 Create Table Book_Loans
 	  (Book_ID int,
