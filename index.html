@@ -1,48 +1,161 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>Index Page</title>
-	<meta charset="utf-8" />
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Jacob's Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="blog.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script>
-       document.createElement("article")
-       document.createElement("header")
-       document.createElement("footer")
-       document.createElement("nav")
-       document.createElement("aside")
-       document.createElement("main")
-       document.createElement("section")
-    </script>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-<!--Unsure what of what to put inside an index page...Already kind of built one on WordPress-->
-</head>
+  </head>
 
-<body>
-    <header>
-        <h1>Welcome to the Index Page.</h1>
-    </header>
+  <body>
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item active" href="#">Home</a>
+          <a class="blog-nav-item" href="#">New Projects</a>
+          <a class="blog-nav-item" href="#">Accomplishments</a>
+          <a class="blog-nav-item" href="#">Contact Me!</a>
+        </nav>
+      </div>
+    </div>
 
-    <main>
-        <h2> Material Header Will Go Here</h2>
-        <section>
-            <h3> Section Title 1</h3>
-            <article> Information about Section 1</article>
-        </section>
+    <div class="container">
+      <div class="blog-header">
+        <h1 class="blog-title">Jacob's Journey</h1>
+        <p class="lead blog-description">Observe or assist a computer geek traverse the infinite industry that is technology</p>
+      </div>
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+          <div class="blog-post">
+            <h2 class="blog-post-title">Sample blog post</h2>
+            <p class="blog-post-meta">October 4, 2016 by: Jacob Wally Jones</p>
+            <p>This is my first blog post. The point of this is to test out Bootstrap. Implementation to my real WordPress site is possible...</p>
+            <hr>
+            <p>Bootstrap is an incredible tool for templated html, css, and js implementation, however <a href="http://wallysblog.org">my true site</a>, is being developed as I create new material.</p>
+            <blockquote>
+              <p>Really enjoy the possibilities that this open source project gives <strong>Even just looking at someone else's code</strong> helps me learn exponentially</p>
+            </blockquote>
+            <p>Learning programming is quite a process but one <em>has to make an attempt</em> in order to get anywhere in this field. But there are so many resources anyone can use to learn these skills quickly.</p>
+            <h2>Why did I choose software development?</h2>
+            <p>There's countless reasons why I ultimately decided to take up learning code through Tech Academy and ultimately through the internet by my own determination.</p>
+            <h3>First Being...</h3>
+            <p>Job security. There isn't a better example of a limitless and exponentially growing industry in America and across the globe. There are some routes you can only take with a higher education, however this industry allows people to join based on their self driven attitude and ability to adapt to situations on the fly. In just a week of studying SQL I learned a solid understanding of the syntax and was able to create an entire mock Library inventory, with multiple tables and developed stored functions and queries for this database to allow for specified results without returning gigantic tables.</p>
+			<h3>Here is an example of that code...</h3>
+            <pre><code>
+/*#7 Retrieve title of Stephen King book, and # of copies owned by Central*/
+select count(lb.BranchName) as [BookCount], lb.BranchName, b.Title
+from Book as B inner join Book_Authors as BA
+	on b.Book_ID = ba.Book_ID
+		inner join Book_Loans as BL
+	on  b.Book_ID = BL.Book_ID
+		inner join Library_Branch as LB
+	on BL.BranchID = LB.BranchID
+Where Ba.AuthorName = 'Stephen King'
+	and lb.BranchName = 'Central'
+Group By lb.BranchName, b.Title
 
-        <section>
-            <h3> Section title=" 2"</h3>
-            <article> Information about Section 2</article>
-        </section>
+/*Stored Procedure for One or more of the above queries*/
 
-        <section>
-            <h3> Section title=" 3"</h3>
-            <article> Information about Section 3</article>
-        </section>
-    </main>
+Create Procedure SearchBookAuthor @Author varchar(30) = NULL
+AS
+select count(lb.BranchName) as [BookCount], lb.BranchName, b.Title, ba.AuthorName
+from Book as B inner join Book_Authors as BA
+	on b.Book_ID = ba.Book_ID
+		inner join Book_Loans as BL
+	on  b.Book_ID = BL.Book_ID
+		inner join Library_Branch as LB
+	on BL.BranchID = LB.BranchID
+Where Ba.AuthorName like '%' + @Author + '%'
+Group By lb.BranchName, b.Title, ba.AuthorName
+			</code></pre>
+            <p>First example being a specified query for books by a specific author at a specific library. The second is a stored procedure for searching the database based on the Author</p>
+            <h3>Second Reason...</h3>
+            <p>It is a job that ultimately pays out more so than other jobs. There are a few reasons for this.</p>
+            <ul>
+              <li>You are consistently learning in this field.</li>
+              <li>The imposter syndrome is all in your head, and everyone has their own pros and cons regarding their education.</li>
+              <li>You can use computer skills to solve everyday problems, or even just small things that you have to repeat. Computers are great at repeating things.</li>
+            </ul>
+            <p>Overall there doesn't seem much of a downside toward learning how to code because...</p>
+            <ol>
+              <li>Even if you are a business man, learning how to do basic database management can help you solidify your job.</li>
+              <li>The stigma against coding being incredibly difficult is pretty much wrong. There is only advanced math usage in higher forms of programming that most programmers don't even have to worry about.</li>
+              <li>You get to create cool things! Learning code can allow you to creat cool gadgets or applications that others can use too.</li>
+            </ol>
+            <p>I really hope you enjoyed perusing this blog page, it was fun to mess around with Bootstrap but it is time to move onto Python!.</p>
+          </div><!-- /.blog-post -->
 
-    <footer>
-        <h6>Bottom Print of the Page</h6>
+          <nav>
+            <ul class="pager">
+              <li><a href="#">Previous Post</a></li>
+              <li><a href="#">Next Post</a></li>
+            </ul>
+          </nav>
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>Archives</h4>
+            <p>Quick links for my accomplished projects, or visit the page and scroll through!</p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Archived Project Links</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">August 2016</a></li>
+              <li><a href="#">September 2016</a></li>
+              <li><a href="#">October 2016</a></li>
+              <li><a href="#">November 2016</a></li>
+              <li><a href="#">December 2016</a></li>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Jacob's Other Sites</h4>
+            <ol class="list-unstyled">
+              <li><a href="https://github.com/wallyjones">GitHub</a></li>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">Facebook</a></li>
+			  <li><a href="#">Twitter</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+      </div><!-- /.row -->
+    </div><!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
     </footer>
 
-</body>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>

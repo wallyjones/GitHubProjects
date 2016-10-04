@@ -52,7 +52,7 @@ having count(bl.CardNO) >= 5
 
 /*#7 Retrieve title of Stephen King book, and # of copies owned by Central*/
 
-select count(lb.BranchName) as [BookCount], lb.BranchName
+select count(lb.BranchName) as [BookCount], lb.BranchName, b.Title
 from Book as B inner join Book_Authors as BA
 	on b.Book_ID = ba.Book_ID
 		inner join Book_Loans as BL
@@ -61,7 +61,7 @@ from Book as B inner join Book_Authors as BA
 	on BL.BranchID = LB.BranchID
 Where Ba.AuthorName = 'Stephen King'
 	and lb.BranchName = 'Central'
-Group By lb.BranchName
+Group By lb.BranchName, b.Title
 
 /*Stored Procedure for One or more of the above queries*/
 
