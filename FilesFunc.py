@@ -44,7 +44,7 @@ def dateCheck(self,now):
     conn.close()
 
 def funkyfunc(self,now):
-    if messagebox.showinfo("Exit program", "Okay to exit application?"):
+    if messagebox.showinfo("Last Checked", "The last time the files were checked was: "):
         print(now)
 
 def count_records(cur):
