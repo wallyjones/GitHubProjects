@@ -5,7 +5,7 @@ from tkinter import messagebox
 import tkinter as tk
 import sqlite3
 import time
-
+from datetime import datetime
 import FilesGUI
 import FilesMain
 
@@ -30,6 +30,7 @@ def filetransfer(self):
     
 def dateCheck(self,now):
     conn = sqlite3.connect('dateCheck.db')
+    Nowish = datetime.fromtimestamp(now)
     with conn:
         cur = conn.cursor()
         cur.execute("CREATE TABLE if not exists tbl_datecheck( \
@@ -39,7 +40,7 @@ def dateCheck(self,now):
         conn.commit()
         cur,count=count_records(cur)
         if count < 1:
-            cur.execute("""INSERT INTO tbl_datecheck(col_date) VALUES (?)""",(str(now),))
+            cur.execute("""INSERT INTO tbl_datecheck(col_date) VALUES (?)""",(Nowish,))
             conn.commit()
     conn.close()
 
