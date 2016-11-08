@@ -26,7 +26,7 @@ def filetransfer(self):
     for f in os.listdir(srcPath):
         if os.stat(os.path.join(srcPath,f)).st_mtime > now - (1*86400):
             shutil.move(os.path.join(srcPath,f), os.path.join(dstPath, f))
-        return ask_quit2(self)
+    return ask_quit2(self)
     
 def ask_quit(self):
     if messagebox.askokcancel("Exit program", "Okay to exit application?"):
