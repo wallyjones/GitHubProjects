@@ -26,7 +26,32 @@ def filetransfer(self):
     for f in os.listdir(srcPath):
         if os.stat(os.path.join(srcPath,f)).st_mtime > now - (1*86400):
             shutil.move(os.path.join(srcPath,f), os.path.join(dstPath, f))
-    return ask_quit2(self)
+    return dateCheck(self,now)
+    
+def dateCheck(self,now):
+    conn = sqlite3.connect('dateCheck.db')
+    with conn:
+        cur = conn.cursor()
+        cur.execute("CREATE TABLE if not exists tbl_datecheck( \
+            ID INTEGER PRIMARY KEY AUTOINCREMENT, \
+            col_date TEXT \
+            );")
+        conn.commit()
+        cur,count=count_records(cur)
+        if count < 1:
+            cur.execute("""INSERT INTO tbl_datecheck(col_date) VALUES (?)""",(str(now),))
+            conn.commit()
+    conn.close()
+
+def funkyfunc(self,now):
+    if messagebox.showinfo("Exit program", "Okay to exit application?"):
+        print(now)
+
+def count_records(cur):
+    count = ""
+    cur.execute("""SELECT COUNT(*) FROM tbl_datecheck""")
+    count = cur.fetchone()[0]
+    return cur,count
     
 def ask_quit(self):
     if messagebox.askokcancel("Exit program", "Okay to exit application?"):
