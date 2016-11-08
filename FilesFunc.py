@@ -43,9 +43,12 @@ def dateCheck(self,now):
             conn.commit()
     conn.close()
 
-def funkyfunc(self,now):
+def funkyfunc(self):
     if messagebox.showinfo("Last Checked", "The last time the files were checked was: "):
-        print(now)
+        conn=sqlite3.connect("dateCheck.db")
+        cur=conn.cursor()
+        cur.execute("SELECT * FROM tbl_datecheck")
+        print(cur.fetchall())
 
 def count_records(cur):
     count = ""

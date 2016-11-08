@@ -21,7 +21,7 @@ def load_gui(self):
     self.txt_dst.grid(row=3,column=1,padx=(26,0),pady=(45,10),sticky=W)
     self.btn_add = tk.Button(self.master,width=12,height=2,text='Send Files',command=lambda: FilesFunc.filetransfer(self))
     self.btn_add.grid(row=8,column=0,padx=(25,0),pady=(45,10),sticky=W)
-    self.btn_test = tk.Button(self.master,width=12,height=2,text='Last Checked',command=lambda: FilesFunc.funkyfunc(now))
+    self.btn_test = tk.Button(self.master,width=12,height=2,text='Last Checked',command=lambda: FilesFunc.funkyfunc(self))
     self.btn_test.grid(row=8,column=1,padx=(25,0),pady=(45,10),sticky=E)
     
 if __name__ == "__main__":
