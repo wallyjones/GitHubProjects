@@ -33,6 +33,7 @@ def dateCheck(self,now):
     Nowish = datetime.fromtimestamp(now)
     with conn:
         cur = conn.cursor()
+        cur.execute("DROP TABLE if exists tbl_datecheck;")
         cur.execute("CREATE TABLE if not exists tbl_datecheck( \
             ID INTEGER PRIMARY KEY AUTOINCREMENT, \
             col_date TEXT \

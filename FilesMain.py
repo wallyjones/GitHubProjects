@@ -24,7 +24,21 @@ class ParentWindow(Frame):
         arg = self.master
 
         FilesGUI.load_gui(self)
-
+        conn = sqlite3.connect('dateCheck.db')
+        with conn:
+            cur = conn.cursor()
+            cur.execute("DROP TABLE if exists tbl_datecheck;")
+            cur.execute("CREATE TABLE if not exists tbl_datecheck( \
+            ID INTEGER PRIMARY KEY AUTOINCREMENT, \
+            col_date TEXT \
+            );")
+            conn.commit()
+            cur,count=FilesFunc.count_records(cur)
+            if count < 1:
+                cur.execute("""INSERT INTO tbl_datecheck(col_date) VALUES (?)""",('Empty',))
+                conn.commit()
+        conn.close()
+            
 if __name__ == "__main__":
     root = tk.Tk()
     App = ParentWindow(root)
