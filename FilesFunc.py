@@ -35,8 +35,7 @@ def filetransfer(self):
     
 def dateCheck(self,now):
     conn = sqlite3.connect('dateCheck.db')
-    later = now
-    Nowish = datetime.fromtimestamp(later)
+    Nowish = datetime.fromtimestamp(now)
     with conn:
         cur = conn.cursor()
         cur.execute("CREATE TABLE if not exists tbl_datecheck( \
@@ -47,12 +46,8 @@ def dateCheck(self,now):
         conn.commit()
     conn.close()
 
-def funkyfunc(self):
-    if messagebox.showinfo("Last Checked", "The last time the files were checked was: "):
-        conn=sqlite3.connect("dateCheck.db")
-        cur=conn.cursor()
-        cur.execute("SELECT * FROM tbl_datecheck")
-        print(cur.fetchall())
+def funkyfunc(Nowish):
+    messagebox.showinfo("Last Checked", str(Nowish))
 
 def count_records(cur):
     count = ""

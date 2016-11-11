@@ -19,7 +19,6 @@ class ParentWindow(Frame):
         FilesFunc.center_window(self,500,300)
         self.master.title("File Transfer")
         self.master.configure(bg="#F0F0F0")
-
         self.master.protocol("WM_DELETE_WINDOW", lambda: FilesFunc.ask_quit(self))
         arg = self.master
 
@@ -34,10 +33,9 @@ class ParentWindow(Frame):
             if count < 1:
                 cur.execute("""INSERT INTO tbl_datecheck(col_date) VALUES (?)""",('Empty',))
                 conn.commit()
-
         FilesGUI.load_gui(self)
-        
         conn.close()
+
             
 if __name__ == "__main__":
     root = tk.Tk()
