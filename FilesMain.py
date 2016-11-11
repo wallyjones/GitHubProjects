@@ -23,13 +23,10 @@ class ParentWindow(Frame):
         self.master.protocol("WM_DELETE_WINDOW", lambda: FilesFunc.ask_quit(self))
         arg = self.master
 
-        FilesGUI.load_gui(self)
         conn = sqlite3.connect('dateCheck.db')
         with conn:
             cur = conn.cursor()
-            cur.execute("DROP TABLE if exists tbl_datecheck;")
             cur.execute("CREATE TABLE if not exists tbl_datecheck( \
-            ID INTEGER PRIMARY KEY AUTOINCREMENT, \
             col_date TEXT \
             );")
             conn.commit()
@@ -37,6 +34,9 @@ class ParentWindow(Frame):
             if count < 1:
                 cur.execute("""INSERT INTO tbl_datecheck(col_date) VALUES (?)""",('Empty',))
                 conn.commit()
+
+        FilesGUI.load_gui(self)
+        
         conn.close()
             
 if __name__ == "__main__":

@@ -26,23 +26,25 @@ def filetransfer(self):
     for f in os.listdir(srcPath):
         if os.stat(os.path.join(srcPath,f)).st_mtime > now - (1*86400):
             shutil.move(os.path.join(srcPath,f), os.path.join(dstPath, f))
-    return dateCheck(self,now)
+        conn = sqlite3.connect('dateCheck.db')
+        with conn:
+            cur = conn.cursor()
+            cur.execute("DELETE FROM tbl_datecheck where col_date='Empty';")
+            conn.commit()
+        return dateCheck(self,now)
     
 def dateCheck(self,now):
     conn = sqlite3.connect('dateCheck.db')
-    Nowish = datetime.fromtimestamp(now)
+    later = now
+    Nowish = datetime.fromtimestamp(later)
     with conn:
         cur = conn.cursor()
-        cur.execute("DROP TABLE if exists tbl_datecheck;")
         cur.execute("CREATE TABLE if not exists tbl_datecheck( \
-            ID INTEGER PRIMARY KEY AUTOINCREMENT, \
             col_date TEXT \
             );")
         conn.commit()
-        cur,count=count_records(cur)
-        if count < 1:
-            cur.execute("""INSERT INTO tbl_datecheck(col_date) VALUES (?)""",(Nowish,))
-            conn.commit()
+        cur.execute("INSERT INTO tbl_datecheck(col_date) VALUES (?)",(Nowish,))
+        conn.commit()
     conn.close()
 
 def funkyfunc(self):
