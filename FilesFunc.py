@@ -31,23 +31,25 @@ def filetransfer(self):
             cur = conn.cursor()
             cur.execute("DELETE FROM tbl_datecheck where col_date='Empty';")
             conn.commit()
-        return dateCheck(self,now)
+    return dateCheck(self,now)
     
 def dateCheck(self,now):
     conn = sqlite3.connect('dateCheck.db')
-    Nowish = datetime.fromtimestamp(now)
+    Nowish = time.ctime(now)
     with conn:
         cur = conn.cursor()
         cur.execute("CREATE TABLE if not exists tbl_datecheck( \
             col_date TEXT \
             );")
-        conn.commit()
-        cur.execute("INSERT INTO tbl_datecheck(col_date) VALUES (?)",(Nowish,))
+        cur.execute("INSERT INTO tbl_datecheck(col_date) VALUES (?)",(str(Nowish),))
         conn.commit()
     conn.close()
 
-def funkyfunc(Nowish):
-    messagebox.showinfo("Last Checked", str(Nowish))
+def funkyfunc(self):
+    conn = sqlite3.connect('dateCheck.db')
+    local = conn.execute("SELECT col_date from tbl_datecheck")
+    for row in local:
+        messagebox.showinfo("Last Checked", row[max])
 
 def count_records(cur):
     count = ""

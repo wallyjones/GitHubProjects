@@ -28,11 +28,9 @@ class ParentWindow(Frame):
             cur.execute("CREATE TABLE if not exists tbl_datecheck( \
             col_date TEXT \
             );")
-            conn.commit()
             cur,count=FilesFunc.count_records(cur)
-            if count < 1:
-                cur.execute("""INSERT INTO tbl_datecheck(col_date) VALUES (?)""",('Empty',))
-                conn.commit()
+            cur.execute("""INSERT INTO tbl_datecheck(col_date) VALUES (?)""",('Empty',))
+            conn.commit()
         FilesGUI.load_gui(self)
         conn.close()
 
