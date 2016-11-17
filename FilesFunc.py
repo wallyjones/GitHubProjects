@@ -21,6 +21,8 @@ def filetransfer(self):
     srcPath=self.var_src.get()
     dstPath=self.var_dst.get()
     now = time.time()
+    lst = Listbox(Tk(), width=50)
+    lst.pack()
     for f in os.listdir(srcPath):
         src = os.path.join(srcPath,f)
         dst = os.path.join(dstPath,f)
@@ -30,10 +32,8 @@ def filetransfer(self):
         last24hrs = time.time() - _24hrsAgo #Seconds that have occured within the last 24 hr period
         if timeDiff < last24hrs: #Seconds that have passed since file creation or modification from last 24 hrs
             shutil.move(src,dst) # move files to destination folder
-    lst = Listbox(Tk(), width=50)
-    Path = os.listdir(dstPath)
-    lst.insert(END,Path)
-    lst.pack()
+            Path = os.listdir(dstPath)
+            lst.insert(END,dst)
     dateCheck(self,now)
     funkyfunc()
     
