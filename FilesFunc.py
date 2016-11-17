@@ -5,51 +5,50 @@ from tkinter import messagebox
 import tkinter as tk
 import sqlite3
 import time
-from datetime import datetime
+import datetime
 import FilesGUI
 import FilesMain
 
 def askdirectory(self):
     src = filedialog.askdirectory()
     self.var_src.set(src)
-    return src
 
 def askdirectory2(self):
     dest = filedialog.askdirectory()
     self.var_dst.set(dest)
-    return dest
 
 def filetransfer(self):
     srcPath=self.var_src.get()
     dstPath=self.var_dst.get()
     now = time.time()
     for f in os.listdir(srcPath):
-        if os.stat(os.path.join(srcPath,f)).st_mtime > now - (1*86400):
-            shutil.move(os.path.join(srcPath,f), os.path.join(dstPath, f))
-        conn = sqlite3.connect('dateCheck.db')
-        with conn:
-            cur = conn.cursor()
-            cur.execute("DELETE FROM tbl_datecheck where col_date='Empty';")
-            conn.commit()
-    return dateCheck(self,now)
+        src = os.path.join(srcPath,f)
+        dst = os.path.join(dstPath,f)
+        mtime = (os.path.getmtime(src)) # file creation/modification date
+        timeDiff = time.time() - mtime #Difference from time of file creation or modification until current time
+        _24hrsAgo = time.time() - (24 *60 *60) #Epoc time for a 24hr period is 86400 seconds
+        last24hrs = time.time() - _24hrsAgo #Seconds that have occured within the last 24 hr period
+        if timeDiff < last24hrs: #Seconds that have passed since file creation or modification from last 24 hrs
+            shutil.move(src,dst) # move files to destination folder
+    lst = Listbox(Tk())
+    lst.insert(END,dstPath)
+    lst.pack()
+    dateCheck(self,now)
+    funkyfunc()
     
 def dateCheck(self,now):
     conn = sqlite3.connect('dateCheck.db')
-    Nowish = time.ctime(now)
     with conn:
         cur = conn.cursor()
-        cur.execute("CREATE TABLE if not exists tbl_datecheck( \
-            col_date TEXT \
-            );")
-        cur.execute("INSERT INTO tbl_datecheck(col_date) VALUES (?)",(str(Nowish),))
+        cur.execute("""UPDATE tbl_datecheck SET col_date = (?)""",(now,)) # just overwrite previous date so it is always most current
         conn.commit()
     conn.close()
+    lastDate = float(now)
+    legibleDate = datetime.datetime.fromtimestamp(lastDate).strftime('%m/%d/%Y %H:%M')
+    self.var_date.set("Last Checked: {}".format(legibleDate))
 
-def funkyfunc(self):
-    conn = sqlite3.connect('dateCheck.db')
-    local = conn.execute("SELECT col_date from tbl_datecheck")
-    for row in local:
-        messagebox.showinfo("Last Checked", row[max])
+def funkyfunc():
+    messagebox.showinfo("Check Complete.","There are no more eligable files to move at this time.")
 
 def count_records(cur):
     count = ""
@@ -76,3 +75,15 @@ def center_window(self, w, h):
     y = int((screen_height/2) - (h/2))
     centerGeo = self.master.geometry('{}x{}+{}+{}'.format(w, h, x, y))
     return centerGeo
+
+def show_date(self):
+    conn = sqlite3.connect('dateCheck.db')
+    with conn:
+        cur = conn.cursor()
+        cur.execute("""SELECT col_date FROM tbl_datecheck""")
+        data = cur.fetchone()[0]
+        lastDate = float(data)
+        legibleDate = datetime.datetime.fromtimestamp(lastDate).strftime('%m/%d/%Y  %H:%M')
+        self.var_date.set("Last Check Date: "+legibleDate)
+        conn.commit()
+    conn.close()

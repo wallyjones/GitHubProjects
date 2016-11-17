@@ -11,6 +11,9 @@ import FilesFunc
 def load_gui(self):
     self.var_src = StringVar()
     self.var_dst = StringVar()
+    self.var_date = StringVar()
+
+    self.var_date.set("Hello!")
     
     self.btn_src = tk.Button(self.master,width=12,height=2,text='Main Folder:',command=lambda: FilesFunc.askdirectory(self))
     self.btn_src.grid(row=1,column=0,padx=(25,0),pady=(45,10),sticky=W)
@@ -22,8 +25,9 @@ def load_gui(self):
     self.txt_dst.grid(row=3,column=1,padx=(26,0),pady=(45,10),sticky=W)
     self.btn_add = tk.Button(self.master,width=12,height=2,text='Send Files',command=lambda: FilesFunc.filetransfer(self))
     self.btn_add.grid(row=8,column=0,padx=(25,0),pady=(45,10),sticky=W)
-    self.btn_test = tk.Button(self.master,width=12,height=2,text='Last Checked',command=lambda: FilesFunc.funkyfunc(self))
-    self.btn_test.grid(row=8,column=1,padx=(25,0),pady=(45,10),sticky=E)
+    self.txt_date = Label(self.master, textvariable=self.var_date)
+    self.txt_date.grid(row=8,column=1,padx=(25,0),pady=(45,10),sticky=E)
+    
 
 if __name__ == "__main__":
     pass

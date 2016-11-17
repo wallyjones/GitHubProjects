@@ -22,17 +22,21 @@ class ParentWindow(Frame):
         self.master.protocol("WM_DELETE_WINDOW", lambda: FilesFunc.ask_quit(self))
         arg = self.master
 
+        now = time.time()
         conn = sqlite3.connect('dateCheck.db')
         with conn:
             cur = conn.cursor()
             cur.execute("CREATE TABLE if not exists tbl_datecheck( \
             col_date TEXT \
             );")
-            cur,count=FilesFunc.count_records(cur)
-            cur.execute("""INSERT INTO tbl_datecheck(col_date) VALUES (?)""",('Empty',))
             conn.commit()
-        FilesGUI.load_gui(self)
+            cur,count=FilesFunc.count_records(cur)
+            if count < 1:
+                cur.execute("""INSERT INTO tbl_datecheck(col_date) VALUES (?)""",(now,))
+                conn.commit()
         conn.close()
+        FilesGUI.load_gui(self)
+        FilesFunc.show_date(self)
 
             
 if __name__ == "__main__":
