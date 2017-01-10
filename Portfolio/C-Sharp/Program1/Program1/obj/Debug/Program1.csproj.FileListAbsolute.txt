@@ -4,3 +4,6 @@ C:\MyProgramProjects\Program1\Program1\bin\Debug\Program1.pdb
 C:\MyProgramProjects\Program1\Program1\obj\Debug\Program1.csprojResolveAssemblyReference.cache
 C:\MyProgramProjects\Program1\Program1\obj\Debug\Program1.exe
 C:\MyProgramProjects\Program1\Program1\obj\Debug\Program1.pdb
+C:\MyProgramProjects\GitHubProjects\Portfolio\C-Sharp\Program1\Program1\bin\Debug\Program1.exe.config
+C:\MyProgramProjects\GitHubProjects\Portfolio\C-Sharp\Program1\Program1\obj\Debug\Program1.exe
+C:\MyProgramProjects\GitHubProjects\Portfolio\C-Sharp\Program1\Program1\obj\Debug\Program1.pdb
