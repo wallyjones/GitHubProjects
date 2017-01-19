@@ -22,11 +22,12 @@ namespace drill23ExceptionHandling
                 {
                     string filePath = "C:\\Error.txt";
                 // this hopefully creates an error.txt file for the exception that is caught.
-                    using (StreamWriter SW = new StreamWriter(filePath, true))
+                    using (StreamWriter SW = new StreamWriter(filePath))
                     {
                         SW.WriteLine("Message :" + ex.Message + "<br/>" + Environment.NewLine + "StackTrace :" + ex.StackTrace +
                         "" + Environment.NewLine + "Date :" + DateTime.Now.ToString());
                         SW.WriteLine(Environment.NewLine + "-----------------------------------------------------------------------------" + Environment.NewLine);
+                        SW.Close();
                     }
                 }
                 finally //Wraps up the program resources if empty
