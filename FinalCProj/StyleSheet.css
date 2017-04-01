@@ -1,0 +1,26 @@
+﻿body {
+    background-color: darkolivegreen;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+form{
+    background: white;
+    border-radius: 10px 25px;
+    
+}
+h1{
+    text-align: center;
+}
+h3{
+    text-align:center;
+}
+p{
+    padding-left:10px;
+}
+footer{
+    text-align: right;
+    padding-right: 15px;
+}
+button{
+    padding-left: 20px;
+}
