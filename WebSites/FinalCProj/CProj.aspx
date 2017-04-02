@@ -54,7 +54,7 @@
                 self.koArray.push({ list: "New thing... " + new Date() });
             };
             self.removeThing = function () {
-                self.koArray.remove(this);
+                self.koArray.pop(this);
             }
         }
         ko.applyBindings(new viewModel());
