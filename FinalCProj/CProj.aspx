@@ -13,7 +13,8 @@
     <h1>Welcome to Make-A-List</h1>
     <h3>Where you can organize Bands, Shopping Lists, etc. On the fly! </h3>
     <div data-bind="template: 'listMaker'">
-        <p>1: <input data-bind="text: koArray" /></p>
+        <p>New Item: <input data-bind="text: koArray" /></p>
+        <p>A new thing!: <span data-bind="text: koArray"></span></p>
     </div>
 
     <script id="listMaker" type="text/html">
@@ -25,6 +26,7 @@
     </script>
 
     <button data-bind="click: addThing">Add stuff!</button>
+    <button data-bind="click: removeThing">Remove stuff!</button>
 
 
     <br />
@@ -50,7 +52,10 @@
             koArray: ko.observableArray([new list]),
             addThing: function () {
                 this.koArray.push(new list("More please!")
-                    )
+                )
+            },
+            removeThing: function () {
+                this.koArray.pop(new list("Less please!")
             }
         };
         ko.applyBindings(viewModel);

@@ -21,6 +21,8 @@ footer{
     text-align: right;
     padding-right: 15px;
 }
-button{
-    padding-left: 20px;
+button {
+    display: block;
+    width: 20%;
+    margin: 0 auto
 }
