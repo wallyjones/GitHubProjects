@@ -13,15 +13,17 @@
     <h1>Welcome to Make-A-List</h1>
     <h3>Where you can organize Bands, Shopping Lists, etc. On the fly! </h3>
     <div data-bind="template: 'listMaker'">
-        <p>New Item: <input data-bind="text: koArray" /></p>
-        <p>A new thing!: <span data-bind="text: koArray"></span></p>
+        <p>New Item: <input data-bind="text: list" /></p>
+        <p>A new thing!: <span data-bind="text: list"></span></p>
     </div>
 
     <script id="listMaker" type="text/html">
-        <ul>
-           {{each(index, list) koArray }}
-                <li>${list.name}</li>
-            {{/each}}
+        <ul data-bind="foreach: koArray">
+            <li>
+                <input data-bind="text: list" />
+
+            </li>
+           
         </ul>
     </script>
 
@@ -43,22 +45,19 @@
 
     <script src="Scripts/knockout-3.4.2.js"></script>
     <script type="text/javascript">
-        function list(name) {
-            return {
-                name: ko.observable(name)
+        function viewModel() {
+            var self = this;
+            self.koArray = ko.observableArray([
+                { list: '' }
+            ]);
+            self.addThing = function () {
+                self.koArray.push({ list: "New thing... " + new Date() });
             };
-        }
-        var viewModel = {
-            koArray: ko.observableArray([new list]),
-            addThing: function () {
-                this.koArray.push(new list("More please!")
-                )
-            },
-            removeThing: function () {
-                this.koArray.pop(new list("Less please!")
+            self.removeThing = function () {
+                self.koArray.remove(this);
             }
-        };
-        ko.applyBindings(viewModel);
+        }
+        ko.applyBindings(new viewModel());
     </script>
 
 </body>
